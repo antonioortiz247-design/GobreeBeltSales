@@ -1,87 +1,122 @@
-const toggle=document.getElementById('menu-toggle')
-const menu=document.getElementById('menu')
-toggle.addEventListener('click',()=>{menu.classList.toggle('active')})
-document.querySelectorAll('nav a').forEach(link=>{link.addEventListener('click',()=>{menu.classList.remove('active')})})
+// ============================
+// SCROLL SUAVE NAVEGACIÓN
+// ============================
+
+document.querySelectorAll("nav a").forEach(link => {
+
+link.addEventListener("click", e => {
+
+e.preventDefault()
+
+const target = document.querySelector(link.getAttribute("href"))
+
+if(target){
+target.scrollIntoView({ behavior:"smooth" })
+}
+
+})
+
+})
+
+
+// ============================
+// GALERÍA LIGHTBOX
+// ============================
+
+const images = document.querySelectorAll(".gallery-img")
+const lightbox = document.getElementById("lightbox")
+const lightboxImg = document.getElementById("lightbox-img")
+const close = document.querySelector(".close")
+
+if(images.length && lightbox && lightboxImg){
+
+images.forEach(img => {
+
+img.addEventListener("click", () => {
+
+lightbox.style.display = "flex"
+lightboxImg.src = img.src
+
+})
+
+})
+
+}
+
+if(close){
+
+close.addEventListener("click", () => {
+
+lightbox.style.display = "none"
+
+})
+
+}
+
+
+// ============================
+// CARRUSEL
+// ============================
+
 const track = document.querySelector(".carousel-track")
 const next = document.querySelector(".next")
 const prev = document.querySelector(".prev")
 
+if(track && next && prev){
+
 let position = 0
 
-next.addEventListener("click",()=>{
+next.addEventListener("click", () => {
 
 position -= 300
-
-if(position < -900){
-position = 0
-}
+if(position < -900) position = 0
 
 track.style.transform = `translateX(${position}px)`
 
 })
 
-const images = document.querySelectorAll(".gallery-img")
-const lightbox = document.getElementById("lightbox")
-const lightboxImg = document.getElementById("lightbox-img")
-const close = document.querySelector(".close")
+prev.addEventListener("click", () => {
 
-images.forEach(img => {
+position += 300
+if(position > 0) position = -900
 
-img.addEventListener("click", ()=>{
-
-lightbox.style.display = "flex"
-lightboxImg.src = img.src
+track.style.transform = `translateX(${position}px)`
 
 })
 
-})
+}
 
-const images = document.querySelectorAll(".gallery-img")
-const lightbox = document.getElementById("lightbox")
-const lightboxImg = document.getElementById("lightbox-img")
-const close = document.querySelector(".close")
 
-images.forEach(img => {
+// ============================
+// CONTADORES ANIMADOS
+// ============================
 
-img.addEventListener("click", ()=>{
+const counters = document.querySelectorAll(".counter")
 
-lightbox.style.display = "flex"
-lightboxImg.src = img.src
+counters.forEach(counter => {
 
-})
+const target = +counter.getAttribute("data-target")
+let current = 0
 
-})
+const increment = target / 100
 
-close.addEventListener("click", ()=>{
+const updateCounter = () => {
 
-lightbox.style.display = "none"
+current += increment
 
-})
+if(current < target){
 
-close.addEventListener("click", ()=>{
+counter.innerText = Math.ceil(current)
+requestAnimationFrame(updateCounter)
 
-lightbox.style.display = "none"
+}else{
 
-})
+counter.innerText = target
 
-const images = document.querySelectorAll(".gallery-img")
-const lightbox = document.getElementById("lightbox")
-const lightboxImg = document.getElementById("lightbox-img")
-const close = document.querySelector(".close")
+}
 
-images.forEach(img => {
+}
 
-img.addEventListener("click", ()=>{
-
-lightbox.style.display = "flex"
-lightboxImg.src = img.src
-
-})
-
-})
-
-close.addEventListener("click", ()=>{
-
-lightbox.style.display = "none"
+updateCounter()
 
 })
