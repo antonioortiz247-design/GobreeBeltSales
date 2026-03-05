@@ -20,19 +20,6 @@ track.style.transform = `translateX(${position}px)`
 
 })
 
-prev.addEventListener("click",()=>{
-
-position += 300
-
-if(position > 0){
-position = -900
-}
-
-track.style.transform = `translateX(${position}px)`
-
-})
-
-
 const images = document.querySelectorAll(".gallery-img")
 const lightbox = document.getElementById("lightbox")
 const lightboxImg = document.getElementById("lightbox-img")
