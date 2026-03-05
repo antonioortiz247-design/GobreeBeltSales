@@ -265,3 +265,29 @@ display:flex;
 gap:20px;
 
 }
+
+.hero-mask{
+
+clip-path:polygon(
+
+0 0,
+
+100% 0,
+
+100% 80%,
+
+0 100%
+
+);
+
+}
+
+@media(max-width:768px){
+
+.hero-parallax{
+
+background-attachment:scroll;
+
+}
+
+}
